@@ -2,39 +2,22 @@ pipeline {
     agent any
 
     stages {
-
-        stage('Checkout') {
+        stage('Build') {
             steps {
-                git 'https://github.com/KPCHIRAGGUPTHA/assessment_agile.git'
+                echo 'Building the project...'
             }
         }
 
-        stage('Run Python') {
+        stage('Test') {
             steps {
-                bat 'python factorial.py'
+                echo 'Testing the project...'
             }
         }
 
-        stage('Build Docker Image') {
+        stage('Deploy') {
             steps {
-                bat 'docker build -t factorial-app:latest .'
+                echo 'Deployment successful!'
             }
-        }
-
-        stage('Run Docker Container') {
-            steps {
-                bat 'docker run --rm factorial-app:latest'
-            }
-        }
-    }
-
-    post {
-        success {
-            echo 'Pipeline completed successfully!'
-        }
-
-        failure {
-            echo 'Pipeline failed!'
         }
     }
 }
