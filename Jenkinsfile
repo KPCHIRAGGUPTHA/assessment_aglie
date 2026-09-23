@@ -2,22 +2,33 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+
+        stage('Run Python') {
             steps {
-                echo 'Building the project...'
+                bat 'python factorial.py'
             }
         }
 
-        stage('Test') {
+        stage('Build Docker Image') {
             steps {
-                echo 'Testing the project...'
+                bat 'docker build -t factorial-app:latest .'
             }
         }
 
-        stage('Deploy') {
+        stage('Run Docker Container') {
             steps {
-                echo 'Deployment successful!'
+                bat 'docker run --rm factorial-app:latest'
             }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline completed successfully!'
+        }
+
+        failure {
+            echo 'Pipeline failed!'
         }
     }
 }
