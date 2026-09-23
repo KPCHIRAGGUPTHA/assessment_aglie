@@ -5,7 +5,7 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                git 'https://github.com/YOUR_USERNAME/factorial-app.git'
+                git 'https://github.com/KPCHIRAGGUPTHA/assessment_agile.git'
             }
         }
 
